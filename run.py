@@ -88,7 +88,7 @@ def IMDER_run(
     for i, seed in enumerate(seeds):
         setup_seed(seed)
         args['cur_seed'] = i + 1
-        result = _run(args, num_workers, is_tune, resume_from_checkpoint=resume_from_checkpoint)
+        result = _run(args, num_workers, is_tune, resume_from_checkpoint=resume_from_checkpoint, model_save_dir=model_save_dir)
         model_results.append(result)
 
     criterions = list(model_results[0].keys())

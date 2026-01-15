@@ -16,7 +16,7 @@ class IMDER():
 
     def do_train(self, model, dataloader, return_epoch_results=False, model_save_dir="", resume_from_checkpoint=False):
         optimizer = optim.Adam(model.parameters(), lr=self.args.learning_rate)
-        scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, verbose=True, patience=self.args.patience)
+        scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=self.args.patience)
         # initilize results
         epochs, best_epoch = 0, 0
         if return_epoch_results:

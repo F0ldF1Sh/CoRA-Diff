@@ -11,7 +11,7 @@ from run import IMDER_run
 
 seed=1234
 mr=0.7
-dataset_name='mosi'
+dataset_name='mosei'
 IMDER_run(model_name='imder',
            dataset_name=dataset_name,
            seeds=[seed, seed+1, seed+2, seed+3, seed+4],
@@ -23,7 +23,7 @@ IMDER_run(model_name='imder',
 
 seed=1234
 mr=0.6
-dataset_name='mosi'
+dataset_name='mosei'
 IMDER_run(model_name='imder',
            dataset_name=dataset_name,
            seeds=[seed, seed+1, seed+2, seed+3, seed+4],
@@ -35,7 +35,7 @@ IMDER_run(model_name='imder',
 
 seed=1234
 mr=0.5
-dataset_name='mosi'
+dataset_name='mosei'
 IMDER_run(model_name='imder',
            dataset_name=dataset_name,
            seeds=[seed, seed+1, seed+2, seed+3, seed+4],
@@ -47,7 +47,7 @@ IMDER_run(model_name='imder',
 
 seed=1234
 mr=0.4
-dataset_name='mosi'
+dataset_name='mosei'
 IMDER_run(model_name='imder',
            dataset_name=dataset_name,
            seeds=[seed, seed+1, seed+2, seed+3, seed+4],
@@ -59,7 +59,7 @@ IMDER_run(model_name='imder',
 
 seed=1234
 mr=0.3
-dataset_name='mosi'
+dataset_name='mosei'
 IMDER_run(model_name='imder',
            dataset_name=dataset_name,
            seeds=[seed, seed+1, seed+2, seed+3, seed+4],
@@ -71,7 +71,7 @@ IMDER_run(model_name='imder',
 
 seed=1234
 mr=0.2
-dataset_name='mosi'
+dataset_name='mosei'
 IMDER_run(model_name='imder',
            dataset_name=dataset_name,
            seeds=[seed, seed+1, seed+2, seed+3, seed+4],
@@ -83,7 +83,7 @@ IMDER_run(model_name='imder',
 
 seed=1234
 mr=0.1
-dataset_name='mosi'
+dataset_name='mosei'
 IMDER_run(model_name='imder',
            dataset_name=dataset_name,
            seeds=[seed, seed+1, seed+2, seed+3, seed+4],
@@ -95,7 +95,7 @@ IMDER_run(model_name='imder',
 
 seed=1234
 mr=0.0
-dataset_name='mosi'
+dataset_name='mosei'
 IMDER_run(model_name='imder',
            dataset_name=dataset_name,
            seeds=[seed, seed+1, seed+2, seed+3, seed+4],

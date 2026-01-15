@@ -176,7 +176,7 @@ class ScoreNet(nn.Module):
             self.adagn_t3 = AdaGN(channels[1], zp_dim)
             self.adagn_t2 = AdaGN(channels[0], zp_dim)
 
-    def forward(self, x, t, condition=None):
+    def forward(self, x, t, condition=None, zs=None, zp=None):
         # Obtain the Gaussian random feature embedding for t
         embed = self.act(self.embed(t))
         # Encoding path
@@ -212,6 +212,12 @@ class ScoreNet(nn.Module):
             h4 += h4_with_cond.permute(1, 2, 0)
         h4 += self.dense4(embed)
         h4 = self.gnorm4(h4)
+        if self.use_cora and zs is not None and zp is not None:
+            h4_perm = h4.permute(0, 2, 1)
+            zs_emb = self.zs_proj_4(zs).unsqueeze(1)
+            attn_out, _ = self.cross_attn_4(query=h4_perm, key=zs_emb, value=zs_emb)
+            h4 = h4 + attn_out.permute(0, 2, 1)
+            h4 = self.adagn_4(h4, zp)
         h4 = self.act(h4)
 
         # Decoding path
@@ -223,7 +229,10 @@ class ScoreNet(nn.Module):
         ## Skip connection from the encoding path
         h += self.dense5(embed)
         h = self.tgnorm4(h)
+        if self.use_cora and zs is not None and zp is not None:
+            h = self.adagn_t4(h, zp)
         h = self.act(h)
+
         h = self.tconv3(torch.cat([h, h3], dim=1))
         if condition is not None:
             condition = self.tconv3_cond(condition)
@@ -231,7 +240,10 @@ class ScoreNet(nn.Module):
             h += h_with_cond.permute(1, 2, 0)
         h += self.dense6(embed)
         h = self.tgnorm3(h)
+        if self.use_cora and zs is not None and zp is not None:
+            h = self.adagn_t3(h, zp)
         h = self.act(h)
+
         h = self.tconv2(torch.cat([h, h2], dim=1))
         if condition is not None:
             condition = self.tconv2_cond(condition)
@@ -239,7 +251,10 @@ class ScoreNet(nn.Module):
             h += h_with_cond.permute(1, 2, 0)
         h += self.dense7(embed)
         h = self.tgnorm2(h)
+        if self.use_cora and zs is not None and zp is not None:
+            h = self.adagn_t2(h, zp)
         h = self.act(h)
+        
         h = self.tconv1(torch.cat([h, h1], dim=1))
         if condition is not None:
             condition = self.tconv1_cond(condition)

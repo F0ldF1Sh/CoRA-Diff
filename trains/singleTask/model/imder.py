@@ -188,8 +188,8 @@ class IMDER(nn.Module):
         if num_modal == 1:  # one modality is available
             if ava_modal_idx[0] == 0:  # has text
                 conditions = proj_x_l
-                loss_score_a = loss_fn(self.score_a, proj_x_a, self.marginal_prob_std_fn, condition=conditions)
-                loss_score_v = loss_fn(self.score_v, proj_x_v, self.marginal_prob_std_fn, condition=conditions)
+                loss_score_a = loss_fn(self.score_a, proj_x_a, self.marginal_prob_std_fn, condition=conditions, zs=zs_a, zp=zp_a)
+                loss_score_v = loss_fn(self.score_v, proj_x_v, self.marginal_prob_std_fn, condition=conditions, zs=zs_v, zp=zp_v)
                 loss_score_l = torch.tensor(0)
                 # Generate samples from score-based models with the Euler_Maruyama_sampler
                 proj_x_a = Euler_Maruyama_sampler(self.score_a, self.marginal_prob_std_fn, self.diffusion_coeff_fn, text.size(0),
@@ -204,8 +204,8 @@ class IMDER(nn.Module):
                 loss_rec = self.MSE(proj_x_a, gt_a) + self.MSE(proj_x_v, gt_v)
             elif ava_modal_idx[0] == 1:  # has video
                 conditions = proj_x_v
-                loss_score_l = loss_fn(self.score_l, proj_x_l, self.marginal_prob_std_fn, condition=conditions)
-                loss_score_a = loss_fn(self.score_a, proj_x_a, self.marginal_prob_std_fn, condition=conditions)
+                loss_score_l = loss_fn(self.score_l, proj_x_l, self.marginal_prob_std_fn, condition=conditions, zs=zs_l, zp=zp_l)
+                loss_score_a = loss_fn(self.score_a, proj_x_a, self.marginal_prob_std_fn, condition=conditions, zs=zs_a, zp=zp_a)
                 loss_score_v = torch.tensor(0)
                 # Generate samples from score-based models with the Euler_Maruyama_sampler
                 proj_x_l = Euler_Maruyama_sampler(self.score_l, self.marginal_prob_std_fn, self.diffusion_coeff_fn, text.size(0),
@@ -220,8 +220,8 @@ class IMDER(nn.Module):
                 loss_rec = self.MSE(proj_x_l, gt_l) + self.MSE(proj_x_a, gt_a)
             else:  # has audio
                 conditions = proj_x_a
-                loss_score_l = loss_fn(self.score_l, proj_x_l, self.marginal_prob_std_fn, condition=conditions)
-                loss_score_v = loss_fn(self.score_v, proj_x_v, self.marginal_prob_std_fn, condition=conditions)
+                loss_score_l = loss_fn(self.score_l, proj_x_l, self.marginal_prob_std_fn, condition=conditions, zs=zs_l, zp=zp_l)
+                loss_score_v = loss_fn(self.score_v, proj_x_v, self.marginal_prob_std_fn, condition=conditions, zs=zs_v, zp=zp_v)
                 loss_score_a = torch.tensor(0)
                 # Generate samples from score-based models with the Euler_Maruyama_sampler
                 proj_x_l = Euler_Maruyama_sampler(self.score_l, self.marginal_prob_std_fn, self.diffusion_coeff_fn, text.size(0),
@@ -237,7 +237,7 @@ class IMDER(nn.Module):
         if num_modal == 2:  # two modalities are available
             if set(modal_idx) - set(ava_modal_idx) == {0}:  # L is missing (V,A available)
                 conditions = self.cat_va(torch.cat([proj_x_v, proj_x_a], dim=1))  # cat two avail modalities as conditions
-                loss_score_l = loss_fn(self.score_l, proj_x_l, self.marginal_prob_std_fn, condition=conditions)
+                loss_score_l = loss_fn(self.score_l, proj_x_l, self.marginal_prob_std_fn, condition=conditions, zs=zs_l, zp=zp_l)
                 loss_score_v, loss_score_a = torch.tensor(0), torch.tensor(0)
                 # Generate samples from score-based models with the Euler_Maruyama_sampler
                 proj_x_l = Euler_Maruyama_sampler(self.score_l, self.marginal_prob_std_fn, self.diffusion_coeff_fn, text.size(0),
@@ -248,7 +248,7 @@ class IMDER(nn.Module):
                 loss_rec = self.MSE(proj_x_l, gt_l)
             if set(modal_idx) - set(ava_modal_idx) == {1}:  # V is missing (L,A available)
                 conditions = self.cat_la(torch.cat([proj_x_l, proj_x_a], dim=1))  # cat two avail modalities as conditions
-                loss_score_v = loss_fn(self.score_v, proj_x_v, self.marginal_prob_std_fn, condition=conditions)
+                loss_score_v = loss_fn(self.score_v, proj_x_v, self.marginal_prob_std_fn, condition=conditions, zs=zs_v, zp=zp_v)
                 loss_score_l, loss_score_a = torch.tensor(0), torch.tensor(0)
                 # Generate samples from score-based models with the Euler_Maruyama_sampler
                 proj_x_v = Euler_Maruyama_sampler(self.score_v, self.marginal_prob_std_fn, self.diffusion_coeff_fn, text.size(0),
@@ -259,7 +259,7 @@ class IMDER(nn.Module):
                 loss_rec = self.MSE(proj_x_v, gt_v)
             if set(modal_idx) - set(ava_modal_idx) == {2}:  # A is missing (L,V available)
                 conditions = self.cat_lv(torch.cat([proj_x_l, proj_x_v], dim=1))  # cat two avail modalities as conditions
-                loss_score_a = loss_fn(self.score_a, proj_x_a, self.marginal_prob_std_fn, condition=conditions)
+                loss_score_a = loss_fn(self.score_a, proj_x_a, self.marginal_prob_std_fn, condition=conditions, zs=zs_a, zp=zp_a)
                 loss_score_l, loss_score_v = torch.tensor(0), torch.tensor(0)
                 # Generate samples from score-based models with the Euler_Maruyama_sampler
                 proj_x_a = Euler_Maruyama_sampler(self.score_a, self.marginal_prob_std_fn, self.diffusion_coeff_fn, text.size(0),

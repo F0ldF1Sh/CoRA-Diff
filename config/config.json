@@ -26,7 +26,7 @@
     "commonParams": {
       "need_data_aligned": true,
       "need_model_aligned": true,
-      "early_stop": 30,
+      "early_stop": 20,
       "use_bert": false,
       "use_finetune": false,
       "attn_mask": true,
