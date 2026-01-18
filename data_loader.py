@@ -178,7 +178,7 @@ class MMDataset(Dataset):
         DATASET_MAP[args['dataset_name']]()
 
     def __init_mosi(self):
-        pt_path = "/root/FoldFish/dataset/CoraDiff-Dataset/MOSI/mosi_unified.pt"
+        pt_path = "/root/autodl-tmp/dataset/MOSI/mosi_unified.pt"
         logger.info(f"Loading data from {pt_path} for mode {self.mode}...")
         
         data_dict = torch.load(pt_path, map_location='cpu')
@@ -232,7 +232,7 @@ class MMDataset(Dataset):
         logger.info(f"Loaded {len(self.data_list)} samples for {self.mode}. Dims: {self.args['feature_dims']}")
 
     def __init_mosei(self):
-        pt_path = "/root/FoldFish/dataset/CoraDiff-Dataset/MOSEI/mosei_unified.pt"
+        pt_path = "/root/autodl-tmp/dataset/MOSEI/mosei_unified.pt"
         logger.info(f"Loading data from {pt_path} for mode {self.mode}...")
         
         data_dict = torch.load(pt_path, map_location='cpu')
@@ -286,7 +286,7 @@ class MMDataset(Dataset):
         logger.info(f"Loaded {len(self.data_list)} samples for {self.mode}. Dims: {self.args['feature_dims']}")
 
     def __init_chsims(self):
-        pt_path = "/root/FoldFish/dataset/CoraDiff-Dataset/CH-SIMS/ch_sims_unified.pt"
+        pt_path = "/root/autodl-tmp/dataset/CH-SIMS/ch_sims_unified.pt"
         logger.info(f"Loading data from {pt_path} for mode {self.mode}...")
         
         data_dict = torch.load(pt_path, map_location='cpu')

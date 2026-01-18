@@ -3,7 +3,7 @@ import torch
 import numpy as np
 import argparse
 import sys
-sys.path.append("/root/FoldFish/code/cora-diff")
+sys.path.append("/root/CoRA-Diff")
 
 from trains.singleTask.model.imder import IMDER 
 from data_loader import MMDataLoader
@@ -18,8 +18,8 @@ args = parser.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 device = 'cuda'
 
-print(f"🚀 Evaluating on {args.dataset} with Fixed Missing Patterns...")
-print(f"📂 Model: {args.ckpt}")
+print(f"Evaluating on {args.dataset} with Fixed Missing Patterns...")
+print(f"Model: {args.ckpt}")
 
 # Configuration
 config = {
