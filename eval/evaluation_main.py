@@ -48,30 +48,6 @@ if args.dataset == 'mosi':
         'num_classes': 1,
     }
 elif args.dataset == 'mosei':
-    """
-    "mosei": {
-        "attn_dropout_a": 0.0,
-        "attn_dropout_v": 0.0,
-        "relu_dropout": 0.0,
-        "embed_dropout": 0.0,
-        "res_dropout": 0.0,
-        "dst_feature_dim_nheads": [32, 8],
-        "batch_size": 128,
-        "learning_rate": 0.002,
-        "nlevels": 6,
-        "conv1d_kernel_size_l": 3,
-        "conv1d_kernel_size_a": 3,
-        "conv1d_kernel_size_v": 3,
-        "text_dropout": 0.0,
-        "attn_dropout": 0.0,
-        "output_dropout": 0.0,
-        "grad_clip": 0.6,
-        "patience": 5,
-        "weight_decay": 0.005,
-        "transformers": "bert",
-        "pretrained": "bert-base-uncased"
-      }
-    """
     config = {
         'dataset_name': args.dataset,
         'use_bert': False,
