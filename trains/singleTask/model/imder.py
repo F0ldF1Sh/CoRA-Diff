@@ -164,7 +164,7 @@ class IMDER(nn.Module):
                                   embed_dropout=self.embed_dropout,
                                   attn_mask=self.attn_mask)
 
-    def forward(self, text, audio, video, num_modal=None, zs=None, zp=None):
+    def forward(self, text, audio, video, num_modal=None, zs=None, zp=None, force_modal_idx=None):
         with torch.no_grad():
             if self.use_bert:
                 text = self.text_model(text)
@@ -184,7 +184,13 @@ class IMDER(nn.Module):
 
         #  random select modality
         modal_idx = [0, 1, 2]  # (0:text, 1:vision, 2:audio)
-        ava_modal_idx = sample(modal_idx, num_modal)  # sample available modality
+        if force_modal_idx is not None:
+            ava_modal_idx = force_modal_idx
+            num_modal = len(ava_modal_idx)
+        else:
+            if num_modal is None: num_modal = 3
+            ava_modal_idx = sample(modal_idx, num_modal)
+        
         if num_modal == 1:  # one modality is available
             if ava_modal_idx[0] == 0:  # has text
                 conditions = proj_x_l

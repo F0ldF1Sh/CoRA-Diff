@@ -285,6 +285,59 @@ class MMDataset(Dataset):
         
         logger.info(f"Loaded {len(self.data_list)} samples for {self.mode}. Dims: {self.args['feature_dims']}")
 
+    def __init_chsims(self):
+        pt_path = "/root/FoldFish/dataset/CoraDiff-Dataset/CH-SIMS/ch_sims_unified.pt"
+        logger.info(f"Loading data from {pt_path} for mode {self.mode}...")
+        
+        data_dict = torch.load(pt_path, map_location='cpu')
+        
+        # 1. 建立全局查找表 (Global Lookup Tables)
+        # 用于在 __getitem__ 中通过 Key 快速找到对应的特征
+        self.global_zs_lookup = {}   # 存 LLM 语义特征 (Zs)
+        self.global_phys_lookup = {} # 存 物理特征 (Zp source)
+        
+        for k, v in data_dict.items():
+            # Zs: 直接取 LLM 提取的 hidden states [Dim=3584]
+            self.global_zs_lookup[k] = {
+                'text': v['text']['zs'],
+                'audio': v['audio']['zs'],
+                'visual': v['visual']['zs']
+            }
+            
+            # Zp: 取物理特征，并做 Global Mean Pooling 变成向量 [SeqLen, Dim] -> [Dim]
+            self.global_phys_lookup[k] = {
+                'text': v['text']['feat'].float().mean(dim=0),   
+                'audio': v['audio']['feat'].float().mean(dim=0), 
+                'visual': v['visual']['feat'].float().mean(dim=0)
+            }
+
+        # 2. 筛选当前 Split 的数据
+        self.data_list = []
+        target_split = self.mode 
+        for video_id, item in data_dict.items():
+            if item['split'] == target_split:
+                self.data_list.append(video_id)
+        
+        # 3. 预加载基础数据 (避免重复 IO)
+        self.samples = {}
+        for video_id in self.data_list:
+            item = data_dict[video_id]
+            self.samples[video_id] = {
+                'text_feat': item['text']['feat'].numpy(),
+                'audio_feat': item['audio']['feat'].numpy(),
+                'vision_feat': item['visual']['feat'].numpy(),
+                'label_reg': item['label_reg'].numpy(),
+                'raw_text': item['annotation'],
+                'retrieval': item['retrieval'] # 包含检索到的邻居 Key 和 Score
+            }
+            
+        # 4. 更新 Config 中的维度 (防止写死导致报错)
+        sample_id = self.data_list[0]
+        self.args['feature_dims'][0] = self.samples[sample_id]['text_feat'].shape[1]
+        self.args['feature_dims'][1] = self.samples[sample_id]['audio_feat'].shape[1]
+        self.args['feature_dims'][2] = self.samples[sample_id]['vision_feat'].shape[1]
+        
+        logger.info(f"Loaded {len(self.data_list)} samples for {self.mode}. Dims: {self.args['feature_dims']}")
 
     def __len__(self):
         return len(self.data_list)
