@@ -22,30 +22,81 @@ print(f"Evaluating on {args.dataset} with Fixed Missing Patterns...")
 print(f"Model: {args.ckpt}")
 
 # Configuration
-config = {
-    'dataset_name': args.dataset,
-    'use_bert': False,
-    'train_mode': 'regression',
-    'batch_size': 32,
-    'feature_dims': [768, 5, 20], 
-    'dst_feature_dim_nheads': [32, 8],
-    'nlevels': 4,
-    'attn_dropout': 0.1,
-    'attn_dropout_a': 0.0,
-    'attn_dropout_v': 0.0,
-    'relu_dropout': 0.1,
-    'embed_dropout': 0.25,
-    'res_dropout': 0.1,
-    'output_dropout': 0.5,
-    'text_dropout': 0.1,
-    'attn_mask': True,
-    
-    'conv1d_kernel_size_l': 3, 
-    'conv1d_kernel_size_a': 3,
-    'conv1d_kernel_size_v': 3,
-    
-    'num_classes': 1,
-}
+if args.dataset == 'mosi':
+    config = {
+        'dataset_name': args.dataset,
+        'use_bert': False,
+        'train_mode': 'regression',
+        'batch_size': 32,
+        'feature_dims': [768, 5, 20], 
+        'dst_feature_dim_nheads': [32, 8],
+        'nlevels': 4,
+        'attn_dropout': 0.1,
+        'attn_dropout_a': 0.0,
+        'attn_dropout_v': 0.0,
+        'relu_dropout': 0.1,
+        'embed_dropout': 0.25,
+        'res_dropout': 0.1,
+        'output_dropout': 0.5,
+        'text_dropout': 0.1,
+        'attn_mask': True,
+        
+        'conv1d_kernel_size_l': 3, 
+        'conv1d_kernel_size_a': 3,
+        'conv1d_kernel_size_v': 3,
+        
+        'num_classes': 1,
+    }
+elif args.dataset == 'mosei':
+    """
+    "mosei": {
+        "attn_dropout_a": 0.0,
+        "attn_dropout_v": 0.0,
+        "relu_dropout": 0.0,
+        "embed_dropout": 0.0,
+        "res_dropout": 0.0,
+        "dst_feature_dim_nheads": [32, 8],
+        "batch_size": 128,
+        "learning_rate": 0.002,
+        "nlevels": 6,
+        "conv1d_kernel_size_l": 3,
+        "conv1d_kernel_size_a": 3,
+        "conv1d_kernel_size_v": 3,
+        "text_dropout": 0.0,
+        "attn_dropout": 0.0,
+        "output_dropout": 0.0,
+        "grad_clip": 0.6,
+        "patience": 5,
+        "weight_decay": 0.005,
+        "transformers": "bert",
+        "pretrained": "bert-base-uncased"
+      }
+    """
+    config = {
+        'dataset_name': args.dataset,
+        'use_bert': False,
+        'train_mode': 'regression',
+        'batch_size': 128,
+        'feature_dims': [768, 5, 20], 
+        'dst_feature_dim_nheads': [32, 8],
+        'nlevels': 6,
+        'attn_dropout': 0.0,
+        'attn_dropout_a': 0.0,
+        'attn_dropout_v': 0.0,
+        'relu_dropout': 0.0,
+        'embed_dropout': 0.0,
+        'res_dropout': 0.0,
+        'output_dropout': 0.0,
+        'text_dropout': 0.0,
+        'attn_mask': True,
+        'conv1d_kernel_size_l': 3, 
+        'conv1d_kernel_size_a': 3,
+        'conv1d_kernel_size_v': 3,
+        'num_classes': 1,
+    }
+else:
+    raise ValueError(f"Unsupported dataset: {args.dataset}")
+
 
 # Load Data
 dataloader = MMDataLoader(config, num_workers=0)['test']

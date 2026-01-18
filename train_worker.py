@@ -17,9 +17,9 @@ dataset_name = args.dataset
 mr = args.mr
 
 # 统一路径管理
-save_dir_base = f"/root/FoldFish/dataset/CoraDiff-Dataset/result/{dataset_name}/mr{mr}_seed{base_seed}"
+save_dir_base = f"/root/autodl-tmp/result/{dataset_name}/mr{mr}_seed{base_seed}"
 
-print(f"🚀 [Worker Start] MR={mr}, Dataset={dataset_name}, Seeds={seeds_list}, GPU={args.gpu}")
+print(f"[Worker Start] MR={mr}, Dataset={dataset_name}, Seeds={seeds_list}, GPU={args.gpu}")
 
 
 try:
