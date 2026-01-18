@@ -1,6 +1,26 @@
+/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:54: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
 Traceback (most recent call last):
   File "/root/CoRA-Diff/eval/evaluation_main.py", line 2, in <module>
     import torch
-  File "/root/miniconda3/lib/python3.10/site-packages/torch/__init__.py", line 218, in <module>
-    from torch._C import *  # noqa: F403
-ImportError: /root/miniconda3/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so: undefined symbol: iJIT_NotifyEvent
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/__init__.py", line 1848, in <module>
+    from . import _meta_registrations
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_meta_registrations.py", line 9, in <module>
+    from torch._decomp import (
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_decomp/__init__.py", line 244, in <module>
+    import torch._refs
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_refs/__init__.py", line 6329, in <module>
+    import torch._refs.nn.functional
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_refs/nn/functional/__init__.py", line 737, in <module>
+    def nll_loss(
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_prims_common/wrappers.py", line 113, in __call__
+    sig = inspect.signature(fn)
+  File "/root/miniconda3/envs/omg/lib/python3.9/inspect.py", line 3113, in signature
+    return Signature.from_callable(obj, follow_wrapped=follow_wrapped)
+  File "/root/miniconda3/envs/omg/lib/python3.9/inspect.py", line 2862, in from_callable
+    return _signature_from_callable(obj, sigcls=cls,
+  File "/root/miniconda3/envs/omg/lib/python3.9/inspect.py", line 2325, in _signature_from_callable
+    return _signature_from_function(sigcls, obj,
+  File "/root/miniconda3/envs/omg/lib/python3.9/inspect.py", line 2177, in _signature_from_function
+    keyword_only = arg_names[pos_count:pos_count + keyword_only_count]
+KeyboardInterrupt

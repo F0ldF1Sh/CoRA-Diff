@@ -1,6 +1,18 @@
+/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:54: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
 Traceback (most recent call last):
-  File "/root/CoRA-Diff/eval/evaluation_main.py", line 2, in <module>
-    import torch
-  File "/root/miniconda3/lib/python3.10/site-packages/torch/__init__.py", line 218, in <module>
-    from torch._C import *  # noqa: F403
-ImportError: /root/miniconda3/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so: undefined symbol: iJIT_NotifyEvent
+  File "/root/CoRA-Diff/eval/evaluation_main.py", line 8, in <module>
+    from trains.singleTask.model.imder import IMDER 
+  File "/root/CoRA-Diff/trains/__init__.py", line 1, in <module>
+    from .ATIO import ATIO
+  File "/root/CoRA-Diff/trains/ATIO.py", line 4, in <module>
+    from .singleTask import *
+  File "/root/CoRA-Diff/trains/singleTask/__init__.py", line 1, in <module>
+    from .IMDER import IMDER
+  File "/root/CoRA-Diff/trains/singleTask/IMDER.py", line 8, in <module>
+    from ..utils import MetricsTop, dict_to_str
+  File "/root/CoRA-Diff/trains/utils/__init__.py", line 2, in <module>
+    from .metricsTop import MetricsTop
+  File "/root/CoRA-Diff/trains/utils/metricsTop.py", line 2, in <module>
+    from sklearn.metrics import accuracy_score, f1_score
+ModuleNotFoundError: No module named 'sklearn'
