@@ -1,7 +1,7 @@
 export CUDA_VISIBLE_DEVICES=0
 CKPT_DIR="/root/autodl-tmp/dataset/result/mosi/mr0.7_seed1234"
 LOG_DIR="/root/CoRA-Diff/eval/mosi/main"
-for epoch in {10..31}
+for epoch in {11..75}
 do
     CKPT_PATH="${CKPT_DIR}/epoch${epoch}.pth"
     LOG_FILE="${LOG_DIR}/mosi_epoch_${epoch}.log"

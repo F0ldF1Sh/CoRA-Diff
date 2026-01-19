@@ -1,18 +1,18 @@
 /root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:54: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   import pynvml  # type: ignore[import]
-Traceback (most recent call last):
-  File "/root/CoRA-Diff/eval/evaluation_main.py", line 8, in <module>
-    from trains.singleTask.model.imder import IMDER 
-  File "/root/CoRA-Diff/trains/__init__.py", line 1, in <module>
-    from .ATIO import ATIO
-  File "/root/CoRA-Diff/trains/ATIO.py", line 4, in <module>
-    from .singleTask import *
-  File "/root/CoRA-Diff/trains/singleTask/__init__.py", line 1, in <module>
-    from .IMDER import IMDER
-  File "/root/CoRA-Diff/trains/singleTask/IMDER.py", line 8, in <module>
-    from ..utils import MetricsTop, dict_to_str
-  File "/root/CoRA-Diff/trains/utils/__init__.py", line 2, in <module>
-    from .metricsTop import MetricsTop
-  File "/root/CoRA-Diff/trains/utils/metricsTop.py", line 2, in <module>
-    from sklearn.metrics import accuracy_score, f1_score
-ModuleNotFoundError: No module named 'sklearn'
+Evaluating on mosi with Fixed Missing Patterns...
+Model: /root/autodl-tmp/dataset/result/mosi/mr0.7_seed1234/epoch12.pth
+Data Loaded. Dims: [768, 5, 20]
+Model Weights Loaded Successfully.
+
+=======================================================
+Scenario             | ACC2 / F1 / ACC7              
+=======================================================
+Miss L ({V, A})      | 42.7 / 26.1 / 15.7
+Miss V ({L, A})      | 48.0 / 38.6 / 14.9
+Miss A ({L, V})      | 42.5 / 26.0 / 17.8
+Miss L, V ({A})      | 42.2 / 25.6 / 15.4
+Miss L, A ({V})      | 42.2 / 25.1 / 16.6
+Miss V, A ({L})      | 43.3 / 27.9 / 17.1
+Full ({L, V, A})     | 44.4 / 30.5 / 14.6
+=======================================================

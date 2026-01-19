@@ -20,6 +20,16 @@
         "language": "en",
         "KeyEval": "Loss"
       }
+    },
+    "chsims": {
+      "aligned": {
+        "featurePath": "CH-SIMS/ch-sims_unified.pt",
+        "feature_dims": [768, 33, 709],
+        "train_samples": 1368,
+        "num_classes": 1,
+        "language": "cn",
+        "KeyEval": "Loss"
+      }
     }
   },
   "imder": {
@@ -76,6 +86,28 @@
         "weight_decay": 0.005,
         "transformers": "bert",
         "pretrained": "bert-base-uncased"
+      },
+      "chsims": {
+        "attn_dropout_a": 0.0,
+        "attn_dropout_v": 0.0,
+        "relu_dropout": 0.0,
+        "embed_dropout": 0.0,
+        "res_dropout": 0.0,
+        "dst_feature_dim_nheads": [32, 8],
+        "batch_size": 64,
+        "learning_rate": 0.002,
+        "nlevels": 4,
+        "conv1d_kernel_size_l": 3,
+        "conv1d_kernel_size_a": 3,
+        "conv1d_kernel_size_v": 3,
+        "text_dropout": 0.0,
+        "attn_dropout": 0.0,
+        "output_dropout": 0.0,
+        "grad_clip": 1.0,
+        "patience": 5,
+        "weight_decay": 0.005,
+        "transformers": "bert",
+        "pretrained": "bert-base-chinese"
       }
     }
   }

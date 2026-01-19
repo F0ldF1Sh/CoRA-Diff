@@ -1,45 +1,18 @@
 /root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:54: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   import pynvml  # type: ignore[import]
-Traceback (most recent call last):
-  File "/root/CoRA-Diff/eval/evaluation_main.py", line 8, in <module>
-    from trains.singleTask.model.imder import IMDER 
-  File "/root/CoRA-Diff/trains/__init__.py", line 1, in <module>
-    from .ATIO import ATIO
-  File "/root/CoRA-Diff/trains/ATIO.py", line 4, in <module>
-    from .singleTask import *
-  File "/root/CoRA-Diff/trains/singleTask/__init__.py", line 1, in <module>
-    from .IMDER import IMDER
-  File "/root/CoRA-Diff/trains/singleTask/IMDER.py", line 8, in <module>
-    from ..utils import MetricsTop, dict_to_str
-  File "/root/CoRA-Diff/trains/utils/__init__.py", line 2, in <module>
-    from .metricsTop import MetricsTop
-  File "/root/CoRA-Diff/trains/utils/metricsTop.py", line 2, in <module>
-    from sklearn.metrics import accuracy_score, f1_score
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/sklearn/__init__.py", line 73, in <module>
-    from .base import clone  # noqa: E402
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/sklearn/base.py", line 19, in <module>
-    from .utils._estimator_html_repr import _HTMLDocumentationLinkMixin, estimator_html_repr
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/sklearn/utils/__init__.py", line 15, in <module>
-    from ._chunking import gen_batches, gen_even_slices
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/sklearn/utils/_chunking.py", line 11, in <module>
-    from ._param_validation import Interval, validate_params
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 17, in <module>
-    from .validation import _is_arraylike_not_scalar
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/sklearn/utils/validation.py", line 21, in <module>
-    from ..utils._array_api import _asarray_with_order, _is_numpy_namespace, get_namespace
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/sklearn/utils/_array_api.py", line 17, in <module>
-    from .fixes import parse_version
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/sklearn/utils/fixes.py", line 17, in <module>
-    import scipy.stats
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/scipy/stats/__init__.py", line 616, in <module>
-    from ._multivariate import *
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/scipy/stats/_multivariate.py", line 14, in <module>
-    from . import _mvn, _covariance, _rcont
-  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 982, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 925, in _find_spec
-  File "<frozen importlib._bootstrap_external>", line 1423, in find_spec
-  File "<frozen importlib._bootstrap_external>", line 1395, in _get_spec
-  File "<frozen importlib._bootstrap_external>", line 1522, in find_spec
-  File "<frozen importlib._bootstrap_external>", line 142, in _path_stat
-KeyboardInterrupt
+Evaluating on mosi with Fixed Missing Patterns...
+Model: /root/autodl-tmp/dataset/result/mosi/mr0.7_seed1234/epoch11.pth
+Data Loaded. Dims: [768, 5, 20]
+Model Weights Loaded Successfully.
+
+=======================================================
+Scenario             | ACC2 / F1 / ACC7              
+=======================================================
+Miss L ({V, A})      | 59.6 / 49.5 / 18.9
+Miss V ({L, A})      | 66.3 / 65.4 / 22.0
+Miss A ({L, V})      | 71.0 / 70.4 / 21.4
+Miss L, V ({A})      | 57.9 / 45.6 / 19.4
+Miss L, A ({V})      | 57.8 / 42.3 / 20.3
+Miss V, A ({L})      | 62.8 / 56.7 / 21.3
+Full ({L, V, A})     | 69.2 / 69.4 / 18.2
+=======================================================

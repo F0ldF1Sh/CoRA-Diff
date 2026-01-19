@@ -1,0 +1,25 @@
+/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:54: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Evaluating on mosi with Fixed Missing Patterns...
+Model: /root/autodl-tmp/dataset/result/mosi/mr0.7_seed1234/imder-mosi.pth
+Data Loaded. Dims: [768, 5, 20]
+Model Weights Loaded Successfully.
+
+=======================================================
+Scenario             | ACC2 / F1 / ACC7              
+=======================================================
+Miss L ({V, A})      | 42.2 / 25.1 / 16.8
+Miss V ({L, A})      | 67.7 / 67.8 / 23.0
+Miss A ({L, V})      | 62.2 / 61.7 / 23.8
+Traceback (most recent call last):
+  File "/root/CoRA-Diff/eval/eval_wo_retriever.py", line 137, in <module>
+    outputs = model(text, audio, vision, 
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/CoRA-Diff/trains/singleTask/model/imder.py", line 233, in forward
+    proj_x_l = Euler_Maruyama_sampler(self.score_l, self.marginal_prob_std_fn, self.diffusion_coeff_fn, text.size(0),
+  File "/root/CoRA-Diff/trains/singleTask/model/scoremodel.py", line 365, in Euler_Maruyama_sampler
+    perturbed_condition = condition + torch.randn_like(condition) * marginal_prob_std(batch_time_step)[:, None, None]
+KeyboardInterrupt

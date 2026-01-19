@@ -1,0 +1,44 @@
+/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:54: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Evaluating on mosei with Fixed Missing Patterns...
+Model: /root/autodl-tmp/dataset/result/mosei/mr0.7_seed1234/imder-mosei.pth
+Data Loaded. Dims: [768, 74, 35]
+Model Weights Loaded Successfully.
+
+=======================================================
+Scenario             | ACC2 / F1 / ACC7              
+=======================================================
+Miss L ({V, A})      | 64.4 / 62.1 / 42.0
+Miss V ({L, A})      | 74.9 / 74.7 / 46.2
+Traceback (most recent call last):
+  File "/root/CoRA-Diff/eval/eval_wo_retriever.py", line 137, in <module>
+    outputs = model(text, audio, vision, 
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/CoRA-Diff/trains/singleTask/model/imder.py", line 271, in forward
+    proj_x_a = Euler_Maruyama_sampler(self.score_a, self.marginal_prob_std_fn, self.diffusion_coeff_fn, text.size(0),
+  File "/root/CoRA-Diff/trains/singleTask/model/scoremodel.py", line 366, in Euler_Maruyama_sampler
+    score = score_model(x, batch_time_step, perturbed_condition, zs=zs, zp=zp)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/CoRA-Diff/trains/singleTask/model/scoremodel.py", line 195, in forward
+    h2_with_cond = self.attention_2(h2.permute(2, 0, 1), condition.permute(2, 0, 1), condition.permute(2, 0, 1))
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/CoRA-Diff/trains/subNets/transformers_encoder/transformer.py", line 81, in forward
+    x = layer(x, x_k, x_v)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/CoRA-Diff/trains/subNets/transformers_encoder/transformer.py", line 145, in forward
+    mask = buffered_future_mask(x, x_k) if self.attn_mask else None
+  File "/root/CoRA-Diff/trains/subNets/transformers_encoder/transformer.py", line 182, in buffered_future_mask
+    future_mask = torch.triu(fill_with_neg_inf(torch.ones(dim1, dim2)), 1+abs(dim2-dim1))
+KeyboardInterrupt

@@ -1,26 +1,18 @@
 /root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:54: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   import pynvml  # type: ignore[import]
-Traceback (most recent call last):
-  File "/root/CoRA-Diff/eval/evaluation_main.py", line 2, in <module>
-    import torch
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/__init__.py", line 1848, in <module>
-    from . import _meta_registrations
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_meta_registrations.py", line 9, in <module>
-    from torch._decomp import (
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_decomp/__init__.py", line 244, in <module>
-    import torch._refs
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_refs/__init__.py", line 6329, in <module>
-    import torch._refs.nn.functional
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_refs/nn/functional/__init__.py", line 737, in <module>
-    def nll_loss(
-  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/_prims_common/wrappers.py", line 113, in __call__
-    sig = inspect.signature(fn)
-  File "/root/miniconda3/envs/omg/lib/python3.9/inspect.py", line 3113, in signature
-    return Signature.from_callable(obj, follow_wrapped=follow_wrapped)
-  File "/root/miniconda3/envs/omg/lib/python3.9/inspect.py", line 2862, in from_callable
-    return _signature_from_callable(obj, sigcls=cls,
-  File "/root/miniconda3/envs/omg/lib/python3.9/inspect.py", line 2325, in _signature_from_callable
-    return _signature_from_function(sigcls, obj,
-  File "/root/miniconda3/envs/omg/lib/python3.9/inspect.py", line 2177, in _signature_from_function
-    keyword_only = arg_names[pos_count:pos_count + keyword_only_count]
-KeyboardInterrupt
+Evaluating on mosi with Fixed Missing Patterns...
+Model: /root/autodl-tmp/dataset/result/mosi/mr0.7_seed1234/epoch14.pth
+Data Loaded. Dims: [768, 5, 20]
+Model Weights Loaded Successfully.
+
+=======================================================
+Scenario             | ACC2 / F1 / ACC7              
+=======================================================
+Miss L ({V, A})      | 46.3 / 37.6 / 14.1
+Miss V ({L, A})      | 62.5 / 61.6 / 18.4
+Miss A ({L, V})      | 47.9 / 37.3 / 18.7
+Miss L, V ({A})      | 50.8 / 49.3 / 14.6
+Miss L, A ({V})      | 42.4 / 26.9 / 14.9
+Miss V, A ({L})      | 50.6 / 42.8 / 16.9
+Full ({L, V, A})     | 54.6 / 49.8 / 18.4
+=======================================================

@@ -1,6 +1,18 @@
-Traceback (most recent call last):
-  File "/root/CoRA-Diff/eval/evaluation_main.py", line 2, in <module>
-    import torch
-  File "/root/miniconda3/lib/python3.10/site-packages/torch/__init__.py", line 218, in <module>
-    from torch._C import *  # noqa: F403
-ImportError: /root/miniconda3/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so: undefined symbol: iJIT_NotifyEvent
+/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:54: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Evaluating on mosi with Fixed Missing Patterns...
+Model: /root/autodl-tmp/dataset/result/mosi/mr0.7_seed1234/epoch21.pth
+Data Loaded. Dims: [768, 5, 20]
+Model Weights Loaded Successfully.
+
+=======================================================
+Scenario             | ACC2 / F1 / ACC7              
+=======================================================
+Miss L ({V, A})      | 58.1 / 58.1 / 15.4
+Miss V ({L, A})      | 64.6 / 64.1 / 22.2
+Miss A ({L, V})      | 59.9 / 58.5 / 23.5
+Miss L, V ({A})      | 52.7 / 50.6 / 14.3
+Miss L, A ({V})      | 49.4 / 44.7 / 16.5
+Miss V, A ({L})      | 55.8 / 52.1 / 20.7
+Full ({L, V, A})     | 66.6 / 66.7 / 22.4
+=======================================================

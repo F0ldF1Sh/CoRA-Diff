@@ -1,0 +1,18 @@
+/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:54: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Evaluating on mosi with Fixed Missing Patterns...
+Model: /root/autodl-tmp/dataset/result/mosi/mr0.7_seed1234/epoch34.pth
+Data Loaded. Dims: [768, 5, 20]
+Model Weights Loaded Successfully.
+
+=======================================================
+Scenario             | ACC2 / F1 / ACC7              
+=======================================================
+Miss L ({V, A})      | 57.8 / 57.9 / 17.9
+Miss V ({L, A})      | 68.9 / 69.1 / 25.1
+Miss A ({L, V})      | 71.0 / 70.4 / 24.9
+Miss L, V ({A})      | 57.5 / 57.7 / 16.6
+Miss L, A ({V})      | 54.9 / 55.0 / 19.1
+Miss V, A ({L})      | 68.8 / 68.4 / 24.2
+Full ({L, V, A})     | 70.1 / 70.3 / 24.3
+=======================================================
